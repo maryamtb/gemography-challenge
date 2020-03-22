@@ -2,7 +2,7 @@ import React from "react";
 import fetch from "isomorphic-fetch";
 
 import getTimeInterval from "../../utils/getTimeInterval";
-import RepoItem from "../RepoItem/RepoItem";
+import RepoItem from "../RepoItem/RepoItem.component";
 
 const mapping = {
   marginLeft: "120",
@@ -21,7 +21,7 @@ class RepoList extends React.Component {
     scrolling: false
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.loadRepos();
     this.scrollListener = window.addEventListener("scroll", e => {
       this.handleScroll(e);
@@ -79,7 +79,7 @@ class RepoList extends React.Component {
       <div>
         <ul className="items" style={mapping}>
           {this.state.items.map(item => (
-            <li key={item.id} >
+            <li key={item.id}>
               <RepoItem {...item} />
             </li>
           ))}
