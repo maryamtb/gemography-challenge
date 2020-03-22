@@ -1,4 +1,10 @@
 import React from "react";
+import { Container, Row, Col } from "shards-react";
+import getFormattedTime from '../../utils/getFormattedTime'
+
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import "shards-ui/dist/css/shards.min.css";
 
 const format = {
   textTransform: "capitalize"
@@ -11,17 +17,36 @@ const box = {
   textAlign: "center"
 };
 
-const RepoItem = props => (
+const RepoCard = (props) => (
   <div>
-    <img src={props.owner.avatar_url} alt={props.name} width='150' height='150' />
-    <h4 style={format}>{props.name}</h4>
-    <p>
-      <span style={format}>{props.description} </span>
-    </p>
-    <p style={box}> Stars: {props.stargazers_count}</p>
-    <p style={box}> Issues: {props.open_issues}</p>
-    <p>Submitted 30 days ago by {props.name}</p>
+    <Container>
+      <Row>
+        <Col sm="12" md="1" lg="2">
+          <img
+            src={props.owner.avatar_url}
+            alt="avatar"
+            width="125"
+            height="125"
+            display="flex"
+          />
+        </Col>
+        <Col>
+          <h4 style={format}>{props.name}</h4>
+          <p>
+            <span style={format}>{props.description} </span>
+            
+          </p>
+          <div>
+            <p style={box}> Stars: {props.stargazers_count}</p>
+              <p style={box}> Issues: {props.open_issues}</p>
+              <p>
+                Submitted {getFormattedTime(props.created_at)} by {props.name}
+              </p>
+          </div>
+        </Col>
+      </Row>
+    </Container>
   </div>
 );
 
-export default RepoItem;
+export default RepoCard;

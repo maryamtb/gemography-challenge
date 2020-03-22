@@ -5,12 +5,12 @@ import getTimeInterval from "../../utils/getTimeInterval";
 import RepoItem from "../RepoItem/RepoItem";
 
 const mapping = {
-  marginLeft: '120',
-  display: 'inline',
-  verticalAlign: 'middle',
-  fontSize: '1.6',
-  fontWeight: 'normal'
-}
+  marginLeft: "120",
+  display: "inline",
+  verticalAlign: "middle",
+  fontSize: "1.6",
+  fontWeight: "normal"
+};
 
 class RepoList extends React.Component {
   state = {
@@ -79,7 +79,7 @@ class RepoList extends React.Component {
       <div>
         <ul className="items" style={mapping}>
           {this.state.items.map(item => (
-            <li key={item.id}>
+            <li key={item.id} >
               <RepoItem {...item} />
             </li>
           ))}

@@ -7,4 +7,6 @@ const getTimeInterval = () => {
   return minus30;
 };
 
+
+
 export default getTimeInterval;
