@@ -1,56 +1,91 @@
 import React from "react";
+import fetch from "isomorphic-fetch";
+
 import getTimeInterval from "../../utils/getTimeInterval";
+import RepoItem from "../RepoItem/RepoItem";
+
+const mapping = {
+  marginLeft: '120',
+  display: 'inline',
+  verticalAlign: 'middle',
+  fontSize: '1.6',
+  fontWeight: 'normal'
+}
 
 class RepoList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      error: null,
-      isLoaded: false,
-      items: []
-    };
+  state = {
+    items: [],
+    per_page: 20,
+    page: 1,
+    totalPages: null,
+    scrolling: false
+  };
+
+  componentWillMount() {
+    this.loadRepos();
+    this.scrollListener = window.addEventListener("scroll", e => {
+      this.handleScroll(e);
+    });
   }
 
-  componentDidMount() {
+  handleScroll = e => {
+    const { scrolling, totalPages, page } = this.state;
+    if (scrolling) return;
+    if (totalPages <= page) return;
+    const lastLi = document.querySelector("ul.items > li:last-child");
+    const lastLiOffset = lastLi.offsetTop + lastLi.clientHeight;
+    const pageOffset = window.pageYOffset + window.innerHeight;
+    var bottomOffset = 20;
+    if (pageOffset > lastLiOffset - bottomOffset) this.loadMore();
+  };
+
+  loadRepos = () => {
+    const { per_page, page, items } = this.state;
     const today = new Date();
     const minus30 = getTimeInterval(today);
-    const url = `https://api.github.com/search/repositories?q=created:>${minus30}&sort=stargazers_count&order=desc`;
-    console.log(minus30)
+    const url = `https://api.github.com/search/repositories?q=created:>${minus30}&sort=stargazers_count&per_page=${per_page}&page=${page}`;
+    console.log("30 days minus today is " + minus30);
+
     fetch(url)
-      .then(res => res.json())
+      .then(response => response.json())
       .then(
-        result => {
+        json => {
           this.setState({
-            isLoaded: true,
-            items: result.items
+            items: [...items, ...json.items],
+            scrolling: false,
+            totalPages: json.total_pages
           });
         },
         error => {
           this.setState({
-            isLoaded: true,
             error
           });
         }
       );
-  }
+  };
+
+  loadMore = () => {
+    this.setState(
+      prevState => ({
+        page: prevState.page + 1,
+        scrolling: true
+      }),
+      this.loadRepos
+    );
+  };
 
   render() {
-    const { error, isLoaded, items } = this.state;
-    if (error) {
-      return <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
-      return <div>Loading...</div>;
-    } else {
-      return (
-        <ul>
-          {items.map(item => (
-            <li key={item.name}>
-              {item.name} 
+    return (
+      <div>
+        <ul className="items" style={mapping}>
+          {this.state.items.map(item => (
+            <li key={item.id}>
+              <RepoItem {...item} />
             </li>
           ))}
         </ul>
-      );
-    }
+      </div>
+    );
   }
 }
 
