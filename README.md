@@ -60,4 +60,4 @@ I used React because I want to improve my React skills and let's face it, it's b
 
 If this project were to scale/features to add:
     1. Replace UNSAFE_componentWillMount with ComponentDidMount in RepoList.jsx file. Or find a work-around.
-    3. Perform TDD
+    2. Perform TDD
