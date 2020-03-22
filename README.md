@@ -1,6 +1,6 @@
 ## GitHub API webapp! 💥
 
-This small webapp fetches the most starred Github repositories relatively created within the last 30 days. This project is brought to you by React. Some features of this project include infinite scroll, isomorphic fetch, moment.js, and shards ui/bootstrap. The design follows a clean, responsive, and minimalistic layout, using library elements that include containers, columns, rows, and a borderless table. 
+This small webapp fetches the most starred Github repositories relatively created within the last 30 days. This project is brought to you by React. The main features of this project include GitHub API data fetch using the isomorphic fetch library and infinite scroll. (find more details about the libraries in the bottom of the page). The project's design follows a clean, responsive, and minimalistic layout.
 
 You can run this project locally by doing the following:
 
@@ -40,3 +40,24 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 To learn React, check out the [React documentation](https://reactjs.org/).
 
 ### 4. Your project should now be running in your localhost!
+
+
+### Complete Library List
+
+- React.js
+- isomorphic-fetch
+- moment.js
+- shards-react
+- bootstrap
+
+Initially, I was going to use a simple AJAX API call, but then I got stuck with pagination. I contemplated using axios, but I was only using the GET command and it didn't solve my pagination issue so after a bit of research, I stumbled upon isomorphic fetch. It's a library that helps use the fetch command globally (between the client and server) and was able to understand the handle scroll method as the page "next-ed" each time. Overall, I found this library to be an easier resource to implement for both performing the api request and implementing the infinite scroll feature.
+
+Moment.js is known as the Swiss Army knife for working with dates in JavaScript. I used it in the two util functions to return an appropriate & corresponding value to 1). the url being fetched and 2). the "Submitted _ days ago" view section. Using moment helped make the util functions a lot easier to write.
+
+Shards UI & Bootstrap were both used for this project's design. I have a preference towards modern, minimalistic styling and these libraries seemed like a good fit for this project.
+
+I used React because I want to improve my React skills and let's face it, it's better than Angular.
+
+If this project were to scale/features to add:
+    1. Replace UNSAFE_componentWillMount with ComponentDidMount in RepoList.jsx file. Or find a work-around.
+    3. Perform TDD
