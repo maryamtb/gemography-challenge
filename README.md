@@ -11,9 +11,9 @@ Here are instructions to help you get started [Cloning a GitHub Repository](http
 
 ### 2. Once downloaded, make sure to install all of the project's dependencies by running:
 
-### `npm i`
+#### `npm i`
 
-Note: You may also use yard if you prefer.
+Note: You may also use yarn if you prefer.
 
 ### 3. Now that your dependencies are all set, you can launch the project by running: 
 
