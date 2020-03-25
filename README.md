@@ -1,6 +1,6 @@
 ## GitHub API webapp! 💥
 
-This small webapp fetches the most starred Github repositories relatively created within the last 30 days. This project is brought to you by React. The main features of this project include GitHub API data fetch using the isomorphic fetch library and infinite scroll. (find more details about the libraries in the bottom of the page). The project's design follows a clean, responsive, and minimalistic layout.
+This small webapp fetches the most starred Github repositories relatively created within the last 30 days. The main features of this project include GitHub API data fetch using the isomorphic fetch library and infinite scroll. The project's design follows a clean, responsive, and minimalistic layout.
 
 You can run this project locally by doing the following:
 
